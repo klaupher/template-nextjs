@@ -9,5 +9,5 @@ AppDataSource.initialize().then(() => {
   app.use(express.json());
   app.use(routes);
   app.use(errorMiddleware);
-  return app.listen(process.env.PORT);
+  return app.listen(process.env.PORT, () => console.log(`Server running in port ${process.env.PORT}`));
 });

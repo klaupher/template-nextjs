@@ -18,17 +18,17 @@ export class Expense {
   @Column()
   yearly: boolean;
 
-  @ManyToOne(() => Category, (category) => category.expense)
+  @ManyToOne(() => Category, (category: Category) => category.expense)
   @JoinColumn({ name: 'category_id', foreignKeyConstraintName: 'fk_expense_category' })
   category: Category;
 
   @Column({ name: 'created_at', default: Timestamp })
   createdAt: Date;
 
-  @ManyToOne(() => User, (user) => user.createUserExpense)
+  @ManyToOne(() => User, (user: User) => user.createUserExpense)
   @JoinColumn({ name: 'created_by_user_id', foreignKeyConstraintName: 'fk_expense_created_by' })
   createdUser: User;
 
-  @OneToMany(() => Statement, (statement) => statement.expense)
+  @OneToMany(() => Statement, (statement: Statement) => statement.expense)
   statement: Statement[];
 }
