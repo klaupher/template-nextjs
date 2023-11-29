@@ -1,7 +1,7 @@
 Template com todas as configurações inicias que um projeto NextJS precisa para começar a rodar.
 
 ## Como utilizar o template
-Utilize o recurso CREATE-NEXT-APP, disponibilizado pela Vercel para criar applicativos NextJS a partir de um template, chamado pela Vercel de EXAMPLE. Para tanto, basta rodar o commando abaixo (que já está apontando para esse repositório):
+Utilize o recurso CREATE-NEXT-APP, disponibilizado pela Vercel para criar applicativos NextJS a partir de um template, chamado pela Vercel de EXAMPLE. Para tanto, basta rodar o comando abaixo (que já está apontando para esse repositório):
 ```bash
 npx create-next-app --example https://github.com/klaupher/template-nextjs.git
 ```
