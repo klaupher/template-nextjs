@@ -18,4 +18,17 @@ export class UserController {
     const { user } = req;
     return res.status(200).json(user);
   }
-}
+  
+  async getById(req: Request, res: Response) {
+    if (isNaN(parseInt(req.params.id))){
+      return res.status(400).json({ message: 'Identificador da usuário inválido' });
+    }
+    const idUser: number = Number.parseInt(req.params.id);
+    return res.status(200).json({ message: 'success', user: await UserService.getById(idUser) });
+  }
+
+  
+  async list(req: Request, res: Response) {
+    return res.status(200).json({ message: 'success', users: await UserService.list()});
+  }
+} 

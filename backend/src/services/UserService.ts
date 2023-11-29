@@ -29,9 +29,13 @@ export class UserService {
     if (!verifyPass) {
       throw new BadRequestError('Email/senha inexistente.');
     }
-    const token = jwt.sign({ id: user.id, name: user.name }, process.env.JWT_PASS ?? '', { expiresIn: '1h' });
-    const { password: _, ...userLogin } = user;
-    return { userLogin, token };
+    try {
+      const token = jwt.sign({ id: user.id, name: user.name }, process.env.JWT_PASS ?? '', { expiresIn: '1h' });      
+      const { password: _, ...userLogin } = user;
+      return { userLogin, token };
+    } catch (error) {
+      throw new BadRequestError(`Error - ${error}`);
+    }
   }
 
   static async create(name: string, email: string, password: string) {
@@ -50,5 +54,15 @@ export class UserService {
     await UserRepository.save(newUser);
     const { password: _, ...user } = newUser;
     return user;
+  }
+
+  static async getById(id: number){
+    return  await UserRepository.findOneBy({ id });
+  }
+  
+  static async list(){
+    const users = await UserRepository.find()
+    const listUsers = users.map((user) => ({...user, password:"_"}))
+    return  listUsers;
   }
 }

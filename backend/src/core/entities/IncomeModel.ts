@@ -2,13 +2,13 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { Category } from './CategoryModel';
 import { Statement } from './StatementModel';
 import { User } from './UserModel';
-import { TypeExpense, DayOfWeek, MonthOfYear } from '../constants/enums';
+import { TypeExpense, DayOfWeek, MonthOfYear, TypeIncome } from '../constants/enums';
 
-@Entity('expenses')
-export class Expense {
-  @PrimaryGeneratedColumn({ name: 'id_expense', primaryKeyConstraintName: 'pk_id_expense' })
+@Entity('incomes')
+export class Income {
+  @PrimaryGeneratedColumn({ name: 'id_income', primaryKeyConstraintName: 'pk_id_income' })
   id: number;
-
+ 
   @Column({ type: 'text' })
   fullname: string;
 
@@ -34,19 +34,19 @@ export class Expense {
   dueWeek: DayOfWeek;
 
   @Column({ type: 'integer', default: 1})
-  typeExpense: TypeExpense
+  typeIncome: TypeIncome
 
   @ManyToOne(() => Category, (category: Category) => category.expense)
-  @JoinColumn({ name: 'category_id', foreignKeyConstraintName: 'fk_expense_category' })
+  @JoinColumn({ name: 'category_id', foreignKeyConstraintName: 'fk_income_category' })
   category: Category;
 
   @Column({ name: 'created_at', default: Timestamp })
   createdAt: Date;
 
-  @ManyToOne(() => User, (user: User) => user.createUserExpense)
-  @JoinColumn({ name: 'created_by_user_id', foreignKeyConstraintName: 'fk_expense_created_by' })
+  @ManyToOne(() => User, (user: User) => user.createUserIncome)
+  @JoinColumn({ name: 'created_by_user_id', foreignKeyConstraintName: 'fk_income_created_by' })
   createdUser: User;
 
-  @OneToMany(() => Statement, (statement: Statement) => statement.expense)
+  @OneToMany(() => Statement, (statement: Statement) => statement.income)
   statement: Statement[];
 }

@@ -2,6 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColum
 import { Category } from './CategoryModel';
 import { Expense } from './ExpenseModel';
 import { Statement } from './StatementModel';
+import { Income } from './IncomeModel';
 
 @Entity('users')
 export class User {
@@ -24,6 +25,8 @@ export class User {
   createUserCategory: Category;
   @OneToMany(() => Expense, (expense) => expense.createdUser)
   createUserExpense: Expense;
+  @OneToMany(() => Income, (income) => income.createdUser)
+  createUserIncome: Income;
   @OneToMany(() => Statement, (statement) => statement.createdUser)
   createUserStatement: Statement;
 }
